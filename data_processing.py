@@ -1,12 +1,13 @@
 import random
 import re
 import pandas as pd
-import numpy as np
 
 # initial data import
+
 data = pd.read_csv('datasets/flats_dataset.csv')
 data.drop('storey_range', axis='columns', inplace=True)
 data.drop('street_name', axis='columns', inplace=True)
+data.drop('lease_commence_date', axis='columns', inplace=True)
 
 
 # processing number of rooms and types of rooms columns, as well as block (sometimes it has a single string sign at
@@ -55,14 +56,12 @@ data['year'] = data['month'].apply(lambda x: date_process(x, 'year'))
 data['month'] = data['month'].apply(lambda x: date_process(x, 'month'))
 
 data_order = ['resale_price', 'year', 'month', 'town', 'no_of_rooms', 'flat_model', 'is_ex', 'block', 'floor_area_sqm',
-              'lease_commence_date', 'remaining_lease']
-
+              'remaining_lease']
 data = data.reindex(data_order, axis=1)
-# getting dummies for different towns and flat models
-# other option I'll try is setting up dictionaries with numeric values responding to different towns and flat models
-data = pd.get_dummies(data, columns=['town', 'flat_model'])
 
-print(data)
+# getting dummies for different towns and flat models
+data = pd.get_dummies(data, columns=['town', 'flat_model'])
 
 # saving final dataset with processed flats info to .csv file
 data.to_csv('datasets\\flats_processed.csv', index=False)
+print(data)
