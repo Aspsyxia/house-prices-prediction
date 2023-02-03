@@ -66,6 +66,13 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="\evaluation\comparison.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="\evaluation\metrics.csv">
           <value>
             <Attribute>
