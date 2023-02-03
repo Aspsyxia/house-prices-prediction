@@ -8,6 +8,7 @@ data = pd.read_csv('datasets/flats_dataset.csv')
 data.drop('storey_range', axis='columns', inplace=True)
 data.drop('street_name', axis='columns', inplace=True)
 data.drop('lease_commence_date', axis='columns', inplace=True)
+data.dropna(inplace=True)
 
 
 # processing number of rooms and types of rooms columns, as well as block (sometimes it has a single string sign at
@@ -37,7 +38,6 @@ def lease_process(lease):
     return result[0]
 
 
-data['remaining_lease'] = data['remaining_lease'].apply(lambda x: random.randint(60, 80) if pd.isna(x) else x)
 data['remaining_lease'] = data['remaining_lease'].apply(lambda x: lease_process(x) if isinstance(x, str) else x)
 
 
